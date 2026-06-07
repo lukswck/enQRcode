@@ -20,7 +20,7 @@ int main(void)
     grid Board;
 
     write_on_board(Board, klength);
-    Board[5][6] = 1;
+
     print_board(Board);
 }
 
@@ -85,7 +85,14 @@ void paste_grid(grid& LargeGrid, const grid& SmallGrid,
 }
 
 void print_line(int box_length, char symbol = kWhite_symbol) {
-    for (int i = 0; i <= box_length; ++i) std::cout << symbol << ' ';
+    std::string line;
+    line.reserve(box_length * 2 + 1 );
+
+    for (int i = 0; i <= box_length; ++i) {
+        line += symbol;
+        line += ' ';
+    }
+    std::cout << line;
     std::cout << symbol << std::endl;
 }
 
