@@ -30,29 +30,44 @@ void write_on_board(Grid& Board, int length){
         };
     };
     // square modules in corners
-    Grid square {square_module(length)};
+    Grid square {square_module(7)};
     past_grid(Board, square, 0, 0);
     past_grid(Board, square, 0, length-7);
     past_grid(Board, square, length-7, 0);
+    Grid align_square {square_module(5)};
+    past_grid(Board, align_square, 16, 16);
+
+    // 
 }
 
-Grid square_module(int length) {
-    int square_length={7};
+Grid square_module(int square_length) {
     Grid square{};
 
     square.resize(square_length,std::vector<bool>(square_length));
     square[0].flip();
     square[square_length-1].flip();
 
-    for (int i{1}; i<square_length-1;++i){
-        square[i][0].flip();
-        square[i][square_length-1].flip();
-    };
-    for (int row: {2,3,4}){
-        for (int col: {2,3,4}){
-            square[row][col].flip();
+    switch (square_length){
+    case 7:
+        for (int i{1}; i<square_length-1;++i){
+            square[i][0].flip();
+            square[i][square_length-1].flip();
         };
+        for (int row: {2,3,4}){
+            for (int col: {2,3,4}){
+                square[row][col].flip();
+            };
+        };
+        break;
+    case 5:
+        for (int i{1}; i<square_length-1;++i){
+            square[i][0].flip();
+            square[i][square_length-1].flip();
+        };
+        square[2][2].flip();
+        break;
     };
+
     return square;
 }
 
