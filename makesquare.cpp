@@ -7,6 +7,7 @@ const int length {25}; //version 2 type (25x25)
 Grid Board;
 
 void write_on_board(Grid& Board, int length);
+void print_line(int length, char symbol);
 Grid square_module(int length);
 void past_grid(Grid& LargeGrid, const Grid& SmallGrid,
                 size_t start_row, size_t start_col);
@@ -67,15 +68,24 @@ void past_grid(Grid& LargeGrid, const Grid& SmallGrid,
 void print_board(const Grid& Board){
     size_t box_length { Board[0].size()};
 
-    std::cout << std::string(box_length*2+3,'-') << '\n';
+    // std::cout << std::string(box_length,'x') << '\n';
+    for (int i{0};i<=box_length;++i) std::cout << "x ";
+    std::cout << 'x' << std::endl;
     for (size_t i = 0; i < Board.size(); ++i) {
-        std::cout << ": ";
+        std::cout << "x ";
         for (const bool value : Board[i]){    
             std::cout << (value?' ':'x') << ' ';
         }
-    std::cout << ":\n";
+    std::cout << "x\n";
     };
-    std::cout << std::string(box_length*2+3,'-') << std::endl;
+    // std::cout << std::string(box_length*2+3,'x') << std::endl;
+    print_line(box_length);
+
+}
+
+void print_line(int box_length, char symbol = 'x') {
+    for (int i = 0; i < box_length; ++i) std::cout << symbol << ' ';
+    std::cout << symbol << std::endl;
 }
 
 // std::cout << '-' << std::string(2*length+2, '-') << '\n';
