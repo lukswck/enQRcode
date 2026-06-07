@@ -4,7 +4,7 @@
 typedef std::vector<bool> vec;
 typedef std::vector<std::vector<bool>> grid;
 
-const int length {25}; //version 2 type (25x25)
+const int klength {25}; //version 2 type (25x25)
 constexpr char kWhite_symbol= '#', kBlack_symbol =' ';
 
 void write_on_board(grid& Board, int length);
@@ -19,7 +19,7 @@ int main(void)
 {
     grid Board;
 
-    write_on_board(Board, length);
+    write_on_board(Board, klength);
     Board[5][6] = 1;
     print_board(Board);
 }
