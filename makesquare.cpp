@@ -3,10 +3,13 @@
 
 typedef std::vector<std::vector<bool>> Grid;
 
-const int length {15}; 
+const int length {25}; //version 2 type (25x25)
 Grid Board;
 
 void write_on_board(Grid& Board, int length);
+Grid square_module(int length);
+void past_grid(Grid& LargeGrid, const Grid& SmallGrid,
+                size_t start_row, size_t start_col);
 
 void print_board(const Grid& Board);
 
@@ -24,6 +27,41 @@ void write_on_board(Grid& Board, int length){
             Board[j][i] = 0;
         };
     };
+    // square modules in corners
+    Grid square {square_module(length)};
+    past_grid(Board, square, 0, 0);
+    past_grid(Board, square, 0, length-7);
+    past_grid(Board, square, length-7, 0);
+}
+
+Grid square_module(int length) {
+    int square_length={7};
+    Grid square{};
+
+    square.resize(square_length,std::vector<bool>(square_length));
+    square[0].flip();
+    square[square_length-1].flip();
+
+    for (int i{1}; i<square_length-1;++i){
+        square[i][0].flip();
+        square[i][square_length-1].flip();
+    };
+    for (int row: {2,3,4}){
+        for (int col: {2,3,4}){
+            square[row][col].flip();
+        };
+    };
+    return square;
+}
+
+void past_grid(Grid& LargeGrid, const Grid& SmallGrid,
+                size_t start_row, size_t start_col){
+    size_t small_lenth{SmallGrid.size()};
+    for (int i{0};i < small_lenth; ++i){
+        for (int j{0};j < small_lenth; ++j){
+            LargeGrid[start_row + i][start_col + j] = SmallGrid[i][j];
+        };
+    };    
 }
 
 void print_board(const Grid& Board){
@@ -33,7 +71,7 @@ void print_board(const Grid& Board){
     for (size_t i = 0; i < Board.size(); ++i) {
         std::cout << ": ";
         for (const bool value : Board[i]){    
-            std::cout << (value?'x':' ') << ' ';
+            std::cout << (value?' ':'x') << ' ';
         }
     std::cout << ":\n";
     };
