@@ -84,12 +84,14 @@ const size_t klength {25};
 // in the future I can adapt for larger versions
 constexpr char kWhite_symbol= '#', kBlack_symbol =' ';
 
-void write_on_board(grid& Board);
 void print_line(size_t length, char symbol );
 grid finder_pattern(size_t length);
 void paste_on_grid(grid& LargeGrid, const grid& SmallGrid,
                 size_t start_row, size_t start_col);
-
+void paste_on_grid(grid& LargeGrid, const vec& Vec,
+                size_t start_row, size_t start_col, 
+                char orientation );
+void write_on_board(grid& Board);
 void print_board(const grid& Board);
 
 int main(void)
@@ -117,6 +119,9 @@ void write_on_board(grid& Board){
     for (size_t i{0}; i<timing.size(); i+=2) {
         timing[i].flip();
     }
+
+    paste_on_grid(Board, timing, 8, 6, 'v');
+    paste_on_grid(Board, timing, 6, 8, 'h');
 }
 
 grid finder_pattern(size_t square_length) {
@@ -159,6 +164,24 @@ void paste_on_grid(grid& LargeGrid, const grid& SmallGrid,
              SmallGrid[i][j];
         };
     };    
+}
+
+void paste_on_grid(grid& LargeGrid, const vec& Vec,
+                size_t start_row, size_t start_col, 
+                char orientation ) {
+    size_t vec_length{Vec.size()};
+    if (orientation=='v') {
+    for (size_t i{0};i < vec_length; ++i){
+            LargeGrid[start_row + i][start_col] =
+             Vec[i];
+    };    
+    }
+    else if (orientation=='h') {
+    for (size_t j{0};j < vec_length; ++j){
+            LargeGrid[start_row ][start_col + j] =
+             Vec[j];
+    };    
+    }
 }
 
 void print_line(size_t box_length, char symbol = kWhite_symbol) {
