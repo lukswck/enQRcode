@@ -1,13 +1,13 @@
 #include <iostream>
 #include <vector>
 
-typedef std::vector<bool> vec;
+// typedef std::vector<bool> vec;
 // typedef std::vector<std::vector<bool>> grid;
 
-class vector{
+class vec{
 public:
-vector(){}
-vector(size_t length){
+vec(){}
+vec(size_t length){
     mlength = length;
     EmptyVector();
 }
@@ -15,10 +15,22 @@ void SetLength(size_t length){
         mlength = length;
     EmptyVector();
 }
+std::vector<bool> body;
+
+size_t size() const {
+    return body.size();
+}
+
+bool& operator[](size_t index) {
+    return body[index];
+}
+
+const bool& operator[](size_t index) const {
+    return body[index];
+}
 
 private:
 size_t mlength{0};
-std::vector<bool> body;
 
 void EmptyVector(){
     body.resize(mlength);
@@ -38,9 +50,6 @@ grid(size_t length){
 void SetLength(size_t length){
     mlength = length;
     EmptyGrid();
-}
-size_t size(){
-    return mlength;
 }
 size_t size() const {
     return body.size();
@@ -104,9 +113,8 @@ void write_on_board(grid& Board){
     paste_on_grid(Board, align_square, 16, 16);
 
     // timing pattern
-    vec timing {};
-    timing.resize(9); 
-    
+    vec timing(9); 
+    for (size_t i{0}; i<timing.size(); i+=2) timing[i].flip();
 }
 
 grid finder_pattern(size_t square_length) {
