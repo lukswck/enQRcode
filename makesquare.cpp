@@ -4,6 +4,36 @@
 typedef std::vector<bool> vec;
 typedef std::vector<std::vector<bool>> grid;
 
+class gridclass {
+public:
+gridclass(){}
+gridclass(int length){
+    mlength = length;
+    EmptyGrid();
+}
+void SetLength(int length){
+    mlength = length;
+    EmptyGrid();
+}
+std::vector<std::vector<bool>> GetBody(){
+    return body;
+}
+
+private:
+int mlength{0};
+std::vector<std::vector<bool>> body;
+
+void EmptyGrid(){
+    body.resize(mlength, std::vector<bool>(mlength));
+    for (int i{0}; i<mlength; ++i){
+        for (int j{0}; j<mlength; ++j){
+            body[j][i] = 0;
+        };
+    };
+}
+
+};
+
 const int klength {25}; 
 // I will start with only version 2 (25x25 modules)
 // in the future I can adapt for larger versions
