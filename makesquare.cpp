@@ -44,7 +44,7 @@ void write_on_board(grid& Board, int length){
     // timing pattern
     vec timing {};
     timing.resize(9); 
-
+    
 }
 
 grid finder_pattern(int square_length) {
@@ -84,7 +84,8 @@ void paste_on_grid(grid& LargeGrid, const grid& SmallGrid,
     size_t small_col_length{SmallGrid.size()};
     for (int i{0};i < small_row_length; ++i){
         for (int j{0};j < small_col_length; ++j){
-            LargeGrid[start_row + i][start_col + j] = SmallGrid[i][j];
+            LargeGrid[start_row + i][start_col + j] =
+             SmallGrid[i][j];
         };
     };    
 }
