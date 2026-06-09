@@ -9,7 +9,7 @@ constexpr char kWhite_symbol= '#', kBlack_symbol =' ';
 
 void write_on_board(grid& Board, int length);
 void print_line(int length, char symbol );
-grid square_module(int length);
+grid finder_pattern(int length);
 void paste_grid(grid& LargeGrid, const grid& SmallGrid,
                 size_t start_row, size_t start_col);
 
@@ -32,18 +32,18 @@ void write_on_board(grid& Board, int length){
         };
     };
     // square modules in corners
-    grid square {square_module(7)};
+    grid square {finder_pattern(7)};
     paste_grid(Board, square, 0, 0);
     paste_grid(Board, square, 0, length-7);
     paste_grid(Board, square, length-7, 0);
-    grid align_square {square_module(5)};
+    grid align_square {finder_pattern(5)};
     paste_grid(Board, align_square, 16, 16);
 
     // timing pattern
 
 }
 
-grid square_module(int square_length) {
+grid finder_pattern(int square_length) {
     grid square{};
 
     square.resize(square_length,std::vector<bool>(square_length));
