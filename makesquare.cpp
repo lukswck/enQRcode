@@ -10,7 +10,7 @@ constexpr char kWhite_symbol= '#', kBlack_symbol =' ';
 void write_on_board(grid& Board, int length);
 void print_line(int length, char symbol );
 grid finder_pattern(int length);
-void paste_grid(grid& LargeGrid, const grid& SmallGrid,
+void paste_on_grid(grid& LargeGrid, const grid& SmallGrid,
                 size_t start_row, size_t start_col);
 
 void print_board(const grid& Board);
@@ -33,11 +33,11 @@ void write_on_board(grid& Board, int length){
     };
     // square modules in corners
     grid square {finder_pattern(7)};
-    paste_grid(Board, square, 0, 0);
-    paste_grid(Board, square, 0, length-7);
-    paste_grid(Board, square, length-7, 0);
+    paste_on_grid(Board, square, 0, 0);
+    paste_on_grid(Board, square, 0, length-7);
+    paste_on_grid(Board, square, length-7, 0);
     grid align_square {finder_pattern(5)};
-    paste_grid(Board, align_square, 16, 16);
+    paste_on_grid(Board, align_square, 16, 16);
 
     // timing pattern
 
@@ -74,7 +74,7 @@ grid finder_pattern(int square_length) {
     return square;
 }
 
-void paste_grid(grid& LargeGrid, const grid& SmallGrid,
+void paste_on_grid(grid& LargeGrid, const grid& SmallGrid,
                 size_t start_row, size_t start_col){
     size_t small_length{SmallGrid.size()};
     for (int i{0};i < small_length; ++i){
