@@ -44,7 +44,6 @@ void write_on_board(grid& Board, int length){
     // timing pattern
     vec timing {};
     timing.resize(9); 
-    std::cout << timing.size() << std::endl;
 
 }
 
@@ -81,9 +80,10 @@ grid finder_pattern(int square_length) {
 
 void paste_on_grid(grid& LargeGrid, const grid& SmallGrid,
                 size_t start_row, size_t start_col){
-    size_t small_length{SmallGrid.size()};
-    for (int i{0};i < small_length; ++i){
-        for (int j{0};j < small_length; ++j){
+    size_t small_row_length{SmallGrid.size()};
+    size_t small_col_length{SmallGrid.size()};
+    for (int i{0};i < small_row_length; ++i){
+        for (int j{0};j < small_col_length; ++j){
             LargeGrid[start_row + i][start_col + j] = SmallGrid[i][j];
         };
     };    
