@@ -1,5 +1,6 @@
 #pragma once
 
+#include <string>
 #include "grid.h"
 #include "TinyPngOut.hpp"
 

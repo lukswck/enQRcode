@@ -1,6 +1,11 @@
+#include <cstddef>
+#include <cstdint>
+#include <cstdlib>
+#include <fstream>
+#include <iostream>
 #include <vector>
-#include "grid.h"
-#include "TinyPngOut.hpp"
+#include <string>
+#include "grid_to_png.h"
 
 static void writeMatrixToPng(
     const grid &matrix, 
@@ -30,4 +35,8 @@ static void writeMatrixToPng(
             pixels[idx + 2] = value;
         }
     }
+
+    std::ofstream out(filename, std::ios::binary);
+    TinyPngOut pngout(grid_width, grid_heigth, out);
+    pngout.write(pixels.data(), static_cast<size_t>(grid_width) * grid_heigth);
     }

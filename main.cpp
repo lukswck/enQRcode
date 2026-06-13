@@ -5,6 +5,7 @@
 #include "grid.h"
 #include "vec.h"
 #include "write_print.h"
+#include "grid_to_png.h"
 
 // Defining global variables
 const size_t klength {25}; 
@@ -19,5 +20,7 @@ int main(void)
     write_on_board(Board);
 
     print_board(Board);
+
+    
 }
 
