@@ -21,6 +21,6 @@ int main(void)
 
     print_board(Board);
 
-    
+    writeMatrixToPng(Board, 5, "code.png") ;
 }
 
